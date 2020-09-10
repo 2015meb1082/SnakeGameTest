@@ -318,6 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9b8fbebfe633ec47acc03c8df3e87ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnCollectable: {fileID: 637769798}
 --- !u!1 &634264528
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,8 +490,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectable: {fileID: 6296417491784326172, guid: 9cdd1504aecc67d4b8869ff99ec1e884,
     type: 3}
-  gridSpawner: {fileID: 0}
+  gridSpawner: {fileID: 637769796}
   timeOfPizza: 10
+  canSpawn: 1
+  collectableLifeTime: 5
+  waitTimeBeforeNextCollectableSpawn: 2
 --- !u!1 &672735835
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,37 +11,46 @@ public class SpawnCollectable : MonoBehaviour
     private int maxRow;
     public float timeOfPizza =10.0f;
     private float nextSpawnTime=0f;
-    private bool canSpawn=true;
+    [SerializeField]
+    private bool canSpawn =true;
+    [SerializeField]
+    private float waitTimeBeforeNextCollectableSpawn =2.0f;
     // Start is called before the first frame update
     void Start()
     {
         gridSpawner = GetComponent<GridSpawner>();
         maxColumn = gridSpawner.columns;
         maxRow = gridSpawner.rows;
+        StartCoroutine(SpawnCollectableObject());
     }
 
-    private void Update() {
-        if(Time.time> nextSpawnTime ){
-            nextSpawnTime = Time.time +timeOfPizza;
-            canSpawn =true;
-        }
 
-        int randomRow =Random.Range(0,maxRow);
-        int randomColumn =Random.Range(0,maxColumn);
-        GameObject randomObj = gridSpawner.GetTileAt(randomRow,randomColumn);
-        if(!randomObj && !randomObj.GetComponent<TileColorChanger>().stateGreen && canSpawn){
-            // Spawn the collectable there
-            SpawnCollectableAt(randomRow,randomColumn);
+    IEnumerator SpawnCollectableObject(){
+        while(true){
+            Vector3 randomCoordinate = FindRandomValidPositionForSpawn();
+            GameObject obj=Instantiate(collectable,randomCoordinate,Quaternion.identity);
+            float collectableLifeTime = obj.GetComponent<CollectableScript>().lifeTime;
+            Debug.Log(collectableLifeTime);
+            yield return new WaitForSeconds(collectableLifeTime + waitTimeBeforeNextCollectableSpawn);
         }
+    }
+
+    //Returns a valid random coordinate which is valid
+    Vector3 FindRandomValidPositionForSpawn(){
+        Vector3 randomValidCoordinate =transform.position;
+        while(true){
+            int randomRow = Random.Range(0,maxRow);
+            int randomCol = Random.Range(0,maxColumn);
+            GameObject objAtRandomPosition = gridSpawner.GetTileAt(randomRow,randomCol);
+            TileColorChanger tileColorChanger = objAtRandomPosition.GetComponent<TileColorChanger>();
         
+            if(objAtRandomPosition && !tileColorChanger.isTileGreen){
+                randomValidCoordinate = new Vector3(randomCol,0,randomRow);
+                break;
+            }
+        }
+        return randomValidCoordinate;
     }
 
-    // Update is called once per frame
-    void SpawnCollectableAt(int randomRow,int randomColumn)
-    {
-        canSpawn=false;
-        GameObject collectableObj = Instantiate(collectable,new Vector3(randomColumn,0,randomRow),Quaternion.identity);
-        Destroy(collectable,timeOfPizza);    
-    }    
     
 }

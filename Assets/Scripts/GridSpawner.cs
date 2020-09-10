@@ -17,6 +17,8 @@ public class GridSpawner : MonoBehaviour
         tilesList = new List<GameObject>();
         SpawnGrid();
     }
+
+    //Spawn Grid 
     private void SpawnGrid(){
         for(int r=0;r<rows;r++){
             //Color randomRowColor = Random.ColorHSV(0f,1.0f,0.73f,0.73f,1.0f,1.0f,1.0f,1.0f);
@@ -27,13 +29,20 @@ public class GridSpawner : MonoBehaviour
         }
     }
 
+    //Spawn Tile at position
     private void SpawnTile(Vector3 position){
         GameObject obj = Instantiate(gridTile,position,Quaternion.identity);
         obj.transform.parent = tileObjectsHolder.transform;
         tilesList.Add(obj);
     }
 
+    // Get the tile at a particular rowNumber and columnNumber
     public GameObject GetTileAt(int rowNumber,int columNumber){
+        if(rowNumber>=rows || columNumber>=columns){
+            Debug.LogWarning("Row number invalid");
+            return null;
+        }
+        
         if(tilesList.Count!=0){
             int index = rowNumber*columns + columNumber;
             GameObject obj =tilesList[index];
@@ -43,12 +52,17 @@ public class GridSpawner : MonoBehaviour
         Debug.Log("Empty List");
         return null;
     }
+
+#region SpawnTile Override
     //Override for Spawn Tile in case we want random row color
     private void SpawnTile(Vector3 position,Color randomRowColor){
         GameObject obj = Instantiate(gridTile,position,Quaternion.identity);
         obj.transform.parent = tileObjectsHolder.transform;
         obj.GetComponent<Renderer>().material.color = randomRowColor;
     }
+#endregion
+
+    //To find the grid center
     public Vector3 GridCenter(){
         float x= (rows%2==0)?(rows/2 - tileOffset/2f):rows/2;
         float z= (columns%2==0)?(columns/2 - tileOffset/2f):columns/2;
