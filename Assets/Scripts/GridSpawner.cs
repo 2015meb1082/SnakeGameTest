@@ -10,7 +10,7 @@ public class GridSpawner : MonoBehaviour
     public int columns =10;
     public int tileOffset =1;
 
-    private List<GameObject> tilesList;
+    public List<GameObject> tilesList;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +18,13 @@ public class GridSpawner : MonoBehaviour
         SpawnGrid();
     }
 
-    //Spawn Grid 
+    private void Update() {
+        
+        if(tilesList.Count==0){
+            GameManager.Instance.GameOver();
+        }    
+    }
+    //Spawn Grid  O(rows X Columns) - Time complexity
     private void SpawnGrid(){
         for(int r=0;r<rows;r++){
             //Color randomRowColor = Random.ColorHSV(0f,1.0f,0.73f,0.73f,1.0f,1.0f,1.0f,1.0f);

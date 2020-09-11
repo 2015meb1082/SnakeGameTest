@@ -14,7 +14,7 @@ public class CollectableScript : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.CompareTag("Player")){
             //Increase the score
-            InGameUI.Instance.IncreaseScore();
+            GameManager.Instance.IncreaseScore();
             Destroy(gameObject);
         }
     }

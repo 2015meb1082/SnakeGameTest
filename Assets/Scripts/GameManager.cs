@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
+using TMPro; 
 using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
@@ -9,12 +12,17 @@ public class GameManager : MonoBehaviour
     private GameObject inGamePanel;
     [SerializeField]
     private GameObject pausePanel;
-
+    [SerializeField]
+    private GridSpawner gridSpawner;
     public int score;
     public bool gameOver;
+    
+    [SerializeField]
+    private TextMeshProUGUI scoreText;
+    private float gameOverCheckWaitingTime=0.1f;
 
     #region Singleton
-    public GameManager Instance;
+    public static GameManager Instance;
     private void Awake() {
         if(Instance!=null){
             Destroy(gameObject);
@@ -26,17 +34,27 @@ public class GameManager : MonoBehaviour
     #endregion
 
     private void Start(){
-
+        gridSpawner = FindObjectOfType<GridSpawner>();
         gameOverPanel.SetActive(false);
         pausePanel.SetActive(false);
+        Time.timeScale =1;
     }
 
+    public void IncreaseScore(){
+        score+=1;
+        scoreText.text =score.ToString();
+    }
+
+
+
     public void GameOver(){
+        Time.timeScale =0;
         gameOver=true;
         gameOverPanel.SetActive(true);
     }
     public void PauseGame(){
         pausePanel.SetActive(true);
+        gameOverPanel.SetActive(false);
         Time.timeScale =0;
     }
     public void ResumeGame(){
@@ -44,7 +62,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale =1;
     }
     public void RestartGame(){
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale =1;
     }
 
 }

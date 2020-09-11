@@ -39,8 +39,8 @@ public class SpawnCollectable : MonoBehaviour
     Vector3 FindRandomValidPositionForSpawn(){
         Vector3 randomValidCoordinate =transform.position;
         while(true){
-            int randomRow = Random.Range(0,maxRow);
-            int randomCol = Random.Range(0,maxColumn);
+            int randomRow = Random.Range(0,maxRow-1);
+            int randomCol = Random.Range(0,maxColumn-1);
             GameObject objAtRandomPosition = gridSpawner.GetTileAt(randomRow,randomCol);
             TileColorChanger tileColorChanger = objAtRandomPosition.GetComponent<TileColorChanger>();
         
