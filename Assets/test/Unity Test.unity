@@ -978,8 +978,8 @@ MonoBehaviour:
   gridTile: {fileID: 6735581291346210274, guid: b8e0f4c1a6280724eac8c35f38a0975e,
     type: 3}
   tileObjectsHolder: {fileID: 278230466}
-  rows: 10
-  columns: 10
+  rows: 15
+  columns: 15
   tileOffset: 1
   tilesList: []
 --- !u!114 &637769797
@@ -1009,7 +1009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebd295d34b78cc04c85af923c5b91d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectable: {fileID: 6296417491784326172, guid: 9cdd1504aecc67d4b8869ff99ec1e884,
+  collectable: {fileID: 3980984247985237596, guid: 89ed7c08874587041bf78e2ae58d5b96,
     type: 3}
   gridSpawner: {fileID: 637769796}
   timeOfPizza: 10
@@ -1425,8 +1425,8 @@ Camera:
   m_GameObject: {fileID: 1067007809}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.11320752, g: 0.11320752, b: 0.11320752, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1466,7 +1466,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067007809}
-  m_LocalRotation: {x: 0.7071067, y: -0.00000008940697, z: 0.000000014901161, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

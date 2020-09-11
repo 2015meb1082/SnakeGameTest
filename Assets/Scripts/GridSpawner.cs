@@ -19,7 +19,7 @@ public class GridSpawner : MonoBehaviour
     }
 
     private void Update() {
-        
+
         if(tilesList.Count==0){
             GameManager.Instance.GameOver();
         }    
