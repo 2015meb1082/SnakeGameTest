@@ -12,18 +12,35 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private GridSpawner gridSpawner;
     public float playerYOffset =2.0f;
-
+    [SerializeField]
+    private SliderController sliderController;
+    
     private void Start() {
         gridSpawner = FindObjectOfType<GridSpawner>();
         transform.position = gridSpawner.GridCenter() + new Vector3(0,playerYOffset,0);
         axisToRotatePlayerAbout = Vector3.up;
     }
     private void Update() {
-        MoveAndRotate();
+        transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime);
+        if(sliderController.canMove){
+            RotatePlayer();
+        }
     }
 
-    #region Move Code
-    private void MoveAndRotate(){
+    public void RotatePlayer(){
+        float degreesMovePerSecond = rotationSpeed*Time.deltaTime;
+        if(sliderController.moveClockWise){
+            //Rotate clockwise
+            transform.Rotate(axisToRotatePlayerAbout,degreesMovePerSecond,Space.Self);
+        }else{
+            //Rotate Anticlockwise
+            transform.Rotate(axisToRotatePlayerAbout,-degreesMovePerSecond,Space.Self);
+        }
+    }
+
+    #region Console Rotation Code
+
+    private void ConsoleInputRotatePlayer(){
         float inputX = Input.GetAxisRaw("Horizontal");
         float degreesMovePerSecond = rotationSpeed*Time.deltaTime;
         if(inputX>0){
@@ -35,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
             //Rotate Anticlockwise
             transform.Rotate(axisToRotatePlayerAbout,-degreesMovePerSecond,Space.Self);
         }
-        transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime);
+        
     }
     #endregion
 }
