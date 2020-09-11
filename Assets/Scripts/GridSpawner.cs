@@ -40,6 +40,7 @@ public class GridSpawner : MonoBehaviour
         GameObject obj = Instantiate(gridTile,position,Quaternion.identity);
         obj.transform.parent = tileObjectsHolder.transform;
         tilesList.Add(obj);
+        Debug.Log("Tiles list Count initially: "+tilesList.Count);
     }
 
     // Get the tile at a particular rowNumber and columnNumber
