@@ -608,7 +608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
-  rotationSpeed: 120
+  rotationSpeed: 180
   gridSpawner: {fileID: 637769796}
   playerYOffset: 0.15
   sliderController: {fileID: 634264532}
@@ -806,6 +806,8 @@ MonoBehaviour:
   rotateSpeed: 3
   rectTransform: {fileID: 0}
   moveClockWise: 1
+  canMove: 0
+  mainCamera: {fileID: 0}
 --- !u!1 &637769794
 GameObject:
   m_ObjectHideFlags: 0

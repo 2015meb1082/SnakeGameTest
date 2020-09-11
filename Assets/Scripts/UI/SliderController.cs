@@ -13,7 +13,7 @@ public class SliderController : MonoBehaviour,IDragHandler,IPointerDownHandler,I
     private float initialPixelPosition;
     private float lastX;
     public bool moveClockWise;
-    public bool canMove=false;
+    public bool canPlayerMove=false;
 
     [SerializeField]
     private Camera mainCamera;
@@ -21,7 +21,6 @@ public class SliderController : MonoBehaviour,IDragHandler,IPointerDownHandler,I
     private void Start() {
         
         mainCamera = Camera.main;
-        Debug.Log("Hello from Slider controller script");
         rectTransform = GetComponent<RectTransform>();   
         axis =  new Vector3(0,0,1);
         initialPixelPosition = mainCamera.WorldToScreenPoint(rectTransform.position).x;
@@ -37,15 +36,20 @@ public class SliderController : MonoBehaviour,IDragHandler,IPointerDownHandler,I
 
     public void OnDrag(PointerEventData pointerEventData)
     {   
-        canMove=true;
-        // If difference is positive or not
-        if(pointerEventData.position.x - lastX>=0){
-            rectTransform.Rotate(axis,-rotateSpeed,Space.Self); 
-            moveClockWise =true;
-        }else{
-            rectTransform.Rotate(axis,rotateSpeed,Space.Self);
-            moveClockWise =false;
+        canPlayerMove=true;
+        float currentZRotation = rectTransform.eulerAngles.z;
+        if(currentZRotation<90 || currentZRotation>270){
+            // If difference is positive or not
+            if(pointerEventData.position.x - lastX>=0){
+                rectTransform.Rotate(axis,-rotateSpeed,Space.Self); 
+                moveClockWise =true;
+            }else{
+                rectTransform.Rotate(axis,rotateSpeed,Space.Self);
+                moveClockWise =false;
+            }
         }
+        
+        
         
         lastX = pointerEventData.position.x;
     }
@@ -54,7 +58,7 @@ public class SliderController : MonoBehaviour,IDragHandler,IPointerDownHandler,I
     //Detect if clicks are no longer registering
     public void OnPointerUp(PointerEventData pointerEventData)
     {
-        canMove=false;
+        canPlayerMove=false;
         Debug.Log(name + " No longer being clicked");
         rectTransform.rotation = Quaternion.identity;
         lastX =initialPixelPosition;

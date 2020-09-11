@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update() {
         transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime);
-        if(sliderController.canMove){
+        if(sliderController.canPlayerMove){
             RotatePlayer();
         }
     }
