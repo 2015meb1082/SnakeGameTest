@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     private GridSpawner gridSpawner;
     public int score;
     public bool gameOver;
+
+    public int greenTileCounter=0;
     
     [SerializeField]
     private TextMeshProUGUI scoreText;
@@ -39,13 +41,22 @@ public class GameManager : MonoBehaviour
         Time.timeScale =1;
     }
 
+    //Update is called every frame
+    private void Update()
+    {
+        //Check here if count of green tiles is equal to tilesList size ,i.e all tiles are green or not
+        if (greenTileCounter == gridSpawner.tilesCount) {
+            GameOver();
+        }
+    }
+
     public void IncreaseScore(){
         score+=1;
         scoreText.text =score.ToString();
     }
 
     public void GameOver(){
-        Time.timeScale =0;
+        Time.timeScale =0.5f;
         gameOver=true;
         gameOverPanel.SetActive(true);
     }

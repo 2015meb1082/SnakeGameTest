@@ -13,10 +13,12 @@ public class TileColorChanger : MonoBehaviour
     public bool isTileGreen =false;
 
     private void OnTriggerEnter(Collider other) {
+        Color currentColor = transform.GetComponent<Renderer>().material.color;
         //If player enters the trigger
-        if(other.gameObject.CompareTag("Player") && gridSpawner){
+        if (other.gameObject.CompareTag("Player") && gridSpawner && currentColor!=greenColor){
             transform.GetComponent<Renderer>().material.color = greenColor;
             isTileGreen =true;
+            GameManager.Instance.greenTileCounter++;
         }
     }
 }

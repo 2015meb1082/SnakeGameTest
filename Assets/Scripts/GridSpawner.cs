@@ -11,19 +11,15 @@ public class GridSpawner : MonoBehaviour
     public int tileOffset =1;
 
     public List<GameObject> tilesList;
+    public int tilesCount;
     // Start is called before the first frame update
     void Start()
     {
         tilesList = new List<GameObject>();
         SpawnGrid();
+        tilesCount = tilesList.Count;
     }
 
-    private void Update() {
-
-        if(tilesList.Count==0){
-            GameManager.Instance.GameOver();
-        }    
-    }
     //Spawn Grid  O(rows X Columns) - Time complexity
     private void SpawnGrid(){
         for(int r=0;r<rows;r++){

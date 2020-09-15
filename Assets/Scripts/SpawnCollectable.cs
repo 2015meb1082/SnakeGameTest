@@ -28,7 +28,7 @@ public class SpawnCollectable : MonoBehaviour
 
 
     IEnumerator SpawnCollectableObject(){
-        while(true){
+        while(!GameManager.Instance.gameOver){
             Vector3 randomCoordinate = FindRandomValidPositionForSpawn();
             GameObject obj=Instantiate(collectable,randomCoordinate,Quaternion.identity);
             float collectableLifeTime = obj.GetComponent<CollectableScript>().lifeTime;
