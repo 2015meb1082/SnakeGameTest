@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -13,33 +11,28 @@ public class PlayerMovement : MonoBehaviour
     private GridSpawner gridSpawner;
     public float playerYOffset =2.0f;
     [SerializeField]
-    private SliderController sliderController;
-    
+    private SteeringWheel steeringWheel;
     private void Start() {
         gridSpawner = FindObjectOfType<GridSpawner>();
         transform.position = gridSpawner.GridCenter() + new Vector3(0,playerYOffset,0);
         axisToRotatePlayerAbout = Vector3.up;
+            
     }
     private void Update() {
         transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime);
-        if(sliderController.canPlayerMove){
+
+        if (steeringWheel.smoothedInput !=0) {
             RotatePlayer();
         }
+        
     }
 
     public void RotatePlayer(){
-        float degreesMovePerSecond = rotationSpeed*Time.deltaTime;
-        if(sliderController.moveClockWise){
-            //Rotate clockwise
-            transform.Rotate(axisToRotatePlayerAbout,degreesMovePerSecond,Space.Self);
-        }else{
-            //Rotate Anticlockwise
-            transform.Rotate(axisToRotatePlayerAbout,-degreesMovePerSecond,Space.Self);
-        }
+        float degreesMovePerSecond = steeringWheel.smoothedInput * rotationSpeed * Time.deltaTime;
+        transform.Rotate(axisToRotatePlayerAbout * degreesMovePerSecond, Space.Self);
     }
 
     #region Console Rotation Code
-
     private void ConsoleInputRotatePlayer(){
         float inputX = Input.GetAxisRaw("Horizontal");
         float degreesMovePerSecond = rotationSpeed*Time.deltaTime;

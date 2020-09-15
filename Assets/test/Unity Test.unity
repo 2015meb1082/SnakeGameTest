@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &133698137
 RectTransform:
   m_ObjectHideFlags: 0
@@ -235,7 +235,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 159001130}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.152, y: 3.152, z: 3.152}
   m_Children:
@@ -469,7 +469,7 @@ MonoBehaviour:
   rotationSpeed: 180
   gridSpawner: {fileID: 637769796}
   playerYOffset: 0.15
-  sliderController: {fileID: 634264532}
+  steeringWheel: {fileID: 634264532}
 --- !u!114 &574523447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -725,7 +725,7 @@ GameObject:
   - component: {fileID: 634264530}
   - component: {fileID: 634264532}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: SteeringWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -738,14 +738,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 634264528}
-  m_LocalRotation: {x: 0, y: 0, z: 0.005759512, w: 0.99998343}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1747136266}
   m_Father: {fileID: 159001131}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.66}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -764,7 +764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0.9339623, g: 0.8123689, b: 0.4537647, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -797,14 +797,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 634264528}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 521d2b18eb3487845b63a3a80366f15f, type: 3}
+  m_Script: {fileID: 11500000, guid: a829648a99636704885262c892b2e6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 3
-  rectTransform: {fileID: 0}
-  moveClockWise: 1
-  canPlayerMove: 0
-  mainCamera: {fileID: 0}
+  wheelBeingHeld: 0
+  wheelAngle: 0
+  lastWheelAngle: 0
+  maxSteerAngle: 200
+  wheelResetSpeed: 500
+  wheelCenter: {x: 0, y: 0}
+  wheelRectTransform: {fileID: 634264529}
+  smoothedInput: 0
 --- !u!1 &637769794
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,8 +857,8 @@ MonoBehaviour:
   gridTile: {fileID: 6735581291346210274, guid: b8e0f4c1a6280724eac8c35f38a0975e,
     type: 3}
   tileObjectsHolder: {fileID: 278230466}
-  rows: 15
-  columns: 15
+  rows: 10
+  columns: 10
   tileOffset: 1
   tilesList: []
 --- !u!114 &637769797
