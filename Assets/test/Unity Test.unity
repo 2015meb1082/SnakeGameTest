@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
-  rotationSpeed: 180
+  rotationSpeed: 270
   gridSpawner: {fileID: 637769796}
   playerYOffset: 0.15
   steeringWheel: {fileID: 634264532}

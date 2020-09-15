@@ -17,7 +17,6 @@ public class TileColorChanger : MonoBehaviour
         if(other.gameObject.CompareTag("Player") && gridSpawner){
             transform.GetComponent<Renderer>().material.color = greenColor;
             isTileGreen =true;
-            gridSpawner.tilesList.Remove(gameObject);
         }
     }
 }

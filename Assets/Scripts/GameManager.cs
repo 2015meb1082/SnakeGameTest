@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro; 
 using UnityEngine.SceneManagement;
@@ -44,8 +43,6 @@ public class GameManager : MonoBehaviour
         score+=1;
         scoreText.text =score.ToString();
     }
-
-
 
     public void GameOver(){
         Time.timeScale =0;
